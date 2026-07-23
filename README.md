@@ -74,6 +74,7 @@ enable Flow Logs with a defined retention policy.
 | Containerization | [Image built](docs/evidence/02-container-image-built.png) |
 | Publication | [Push to ECR](docs/evidence/03-image-pushed-to-ecr.png) · [ECR console](docs/evidence/04-ecr-repository-console.png) |
 | Migrated runtime | [Application on Fargate](docs/evidence/05-workload-running-aws-cloud.png) · [ECS service](docs/evidence/06-ecs-service-running.png) |
+| Quality gate | [Pipeline checks on pull request](docs/evidence/07-pull-request-checks-passed.png) |
 
 The before and after responses show the same application reporting
 different environments and hostnames, confirming the workload changed
