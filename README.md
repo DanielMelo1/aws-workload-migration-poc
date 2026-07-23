@@ -6,6 +6,11 @@ directly on a server is containerized and moved to AWS ECS Fargate.
 The migration is observable — the application reports which environment
 it is running in, producing verifiable before/after evidence.
 
+> **Scope.** This is a proof of concept. The environment was provisioned,
+> exercised end to end and destroyed. Architectural choices reflect that
+> scope — components that do not change what is being demonstrated were
+> deliberately left out and are documented under Accepted trade-offs.
+
 ## Migration path
 
 EC2 source (legacy runtime) -> EC2 target (containerize) -> Amazon ECR (image 1.0.0) -> ECS Fargate (managed runtime)
@@ -56,14 +61,16 @@ Two Checkov findings are deliberately accepted and documented in
 infra/.checkov.yml:
 
 **Public subnet with auto-assigned public IP.** Fargate requires outbound
-connectivity to pull images from ECR. The alternatives — a NAT Gateway
-(~$32/month) or four VPC Interface Endpoints (~$29/month) — are not
-justified for a short-lived proof of concept. A production deployment
-would place tasks in private subnets behind a NAT Gateway.
+connectivity to pull images from ECR. Private subnets would require either
+a NAT Gateway or four VPC Interface Endpoints — additional components that
+do not change what this proof of concept demonstrates, while adding surface
+to provision and tear down. A production deployment would place tasks in
+private subnets behind a NAT Gateway.
 
-**VPC Flow Logs disabled.** Continuous log ingestion carries CloudWatch
-cost with no analytical value in a two-day environment. Production would
-enable Flow Logs with a defined retention policy.
+**VPC Flow Logs disabled.** Flow Logs support traffic analysis over time.
+In an environment provisioned and destroyed within days there is no
+analytical window to justify the ingestion. Production would enable them
+with a defined retention policy.
 
 ## Evidence
 

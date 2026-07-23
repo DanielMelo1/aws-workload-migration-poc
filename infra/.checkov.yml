@@ -3,15 +3,16 @@
 #
 # CKV_AWS_130 - Public subnet with auto-assign public IP
 #   Fargate requires outbound connectivity to pull images from ECR.
-#   Alternatives evaluated: NAT Gateway (~$32/month) or four VPC
-#   Interface Endpoints (~$29/month). Neither is justified for a
-#   short-lived proof of concept. Production would use private
-#   subnets with a NAT Gateway.
+#   Private subnets would require a NAT Gateway or four VPC Interface
+#   Endpoints. Neither changes what this proof of concept demonstrates,
+#   while adding components to provision and tear down. Production
+#   would place tasks in private subnets behind a NAT Gateway.
 #
 # CKV2_AWS_11 - VPC Flow Logs disabled
-#   Continuous log ingestion carries CloudWatch cost with no
-#   analytical value in a two-day environment. Production would
-#   enable Flow Logs with a defined retention policy.
+#   Flow Logs support traffic analysis over time. This environment is
+#   provisioned, exercised and destroyed within days, leaving no
+#   analytical window to justify the ingestion. Production would enable
+#   them with a defined retention policy.
 
 skip-check:
   - CKV_AWS_130
