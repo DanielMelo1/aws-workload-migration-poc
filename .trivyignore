@@ -1,4 +1,0 @@
-# Base image OS-level CVEs without vendor patch available.
-# Reviewed and accepted: no fixed version published by Debian for
-# python:3.11-slim at the time of this assessment.
-# Reassess on each base image update.
